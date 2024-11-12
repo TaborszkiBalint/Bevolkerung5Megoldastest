@@ -8,6 +8,7 @@ internal class Allampolgar
     public int Suly { get; set; }
     public int Magassag { get; set; }
     public bool Dohanyzik { get; set; }
+    public string DohanyzikSzoveges => Dohanyzik ? "igen" : "nem";
     public string Nemzetiseg { get; set; }
     public string Nepcsoport { get; set; }
     public string Tartomany { get; set; }
@@ -16,6 +17,7 @@ internal class Allampolgar
     public string IskolaiVegzetseg { get; set; }
     public string PolitikaiNezet { get; set; }
     public bool AktivSzavazo { get; set; }
+    public string AktivSzavazoSzoveges => AktivSzavazo ? "igen" : "nem";
     public int SorFogyasztasEvente { get; set; }
     public int KrumpliFogyasztasEvente { get; set; }
 

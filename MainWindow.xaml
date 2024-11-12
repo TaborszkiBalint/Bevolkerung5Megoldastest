@@ -20,17 +20,28 @@
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.Column="0" Height="30" Width="50" x:Name="Feladatok" />
+            <ComboBox Grid.Column="0" Height="30" Width="50" x:Name="FeladatokCombo" SelectionChanged="Combo_SelectionChanged" />
             <Label Grid.Column="1" Content="feladat egy mondatos megoldása:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" />
             <Label Grid.Column="2" x:Name="MegoldasMondatos" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" />
         </Grid>
 
-        <DataGrid Grid.Row="1" x:Name="MegoldasTeljes" FontSize="14" Width="auto" AutoGenerateColumns="False" ItemsSource="{Binding Lakossag}">
+        <DataGrid Grid.Row="1" x:Name="MegoldasTeljes" FontSize="14" Width="auto" AutoGenerateColumns="False" ItemsSource="{Binding}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
                 <DataGridTextColumn Header="Nem" Binding="{Binding Nem}" />
                 <DataGridTextColumn Header="Születési év" Binding="{Binding SzultetesiEv}" />
                 <DataGridTextColumn Header="Súly" Binding="{Binding Suly}" />
+                <DataGridTextColumn Header="Magasság" Binding="{Binding Magassag}" />
+                <DataGridTextColumn Header="Dohányzik" Binding="{Binding DohanyzikSzoveges}" />
+                <DataGridTextColumn Header="Nemzetiség" Binding="{Binding Nemzetiseg}" />
+                <DataGridTextColumn Header="Népcsoport" Binding="{Binding Nepcsoport}" />
+                <DataGridTextColumn Header="Tartomány" Binding="{Binding Tartomany}" />
+                <DataGridTextColumn Header="Nettó jövedelem" Binding="{Binding NettoJovedelem}" />
+                <DataGridTextColumn Header="Iskolai végzetség" Binding="{Binding IskolaiVegzetseg}" />
+                <DataGridTextColumn Header="Politikai nézet" Binding="{Binding PolitikaiNezet}" />
+                <DataGridTextColumn Header="Aktív szavazó" Binding="{Binding AktivSzavazoSzoveges}" />
+                <DataGridTextColumn Header="Sörfogyasztás évente" Binding="{Binding SorFogyasztasEvente}" />
+                <DataGridTextColumn Header="Krumplifogyasztás évente" Binding="{Binding KrumpliFogyasztasEvente}" />
             </DataGrid.Columns>
         </DataGrid>
         <ListBox Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="MegoldasLista" FontSize="14"/>
