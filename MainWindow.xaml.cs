@@ -52,12 +52,33 @@ public partial class MainWindow : Window
 
     private void Feladat1()
     {
-        MegoldasMondatos.Content = $"1. feladat: Az állampolgárok száma: {Lakossag.Count}";
+        MegoldasMondatos.Content = $"1. feladat:  Legmagasabb nettó éves jövedelem: {Lakossag.OrderByDescending(l => l.NettoJovedelem).First().NettoJovedelem}€";
     }
 
     private void Feladat2()
     {
-        MegoldasMondatos.Content = $"2. feladat: Az állampolgárok átlagéletkora: {Lakossag.Average(a => a.Kor):F2} év";
+        MegoldasMondatos.Content = $"2. feladat:  Állampolgárok átlagos nettó éves jövedelme: {Lakossag.Average(a => a.NettoJovedelem):F2}€";
+    }
+
+    private void Feladat3()
+    {
+        foreach (var tartomany in Lakossag.GroupBy(l => l.Tartomany))
+            MegoldasLista.Items.Add($"{tartomany.Key} - {tartomany.Count()} fő");
+    }
+
+    private void Feladat4()
+    {
+        MegoldasTeljes.ItemsSource = Lakossag.Where(x => x.Nemzetiseg == "angolai");
+    }
+
+    private void Feladat5()
+    {
+        int legfiatalabbKor = Lakossag.OrderBy(x => x.Kor).First().Kor;
+        MegoldasTeljes.ItemsSource = Lakossag.Where(x => x.Kor == legfiatalabbKor);
+    }
+    private void feladat6()
+    {
+
     }
 
 }
