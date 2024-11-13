@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bevolkerung"
         mc:Ignorable="d"
-        Title="Németország anonimizált lakossági adatai" Height="750" Width="1300">
+        Title="Németország anonimizált lakossági adatai" Height="750" Width="1300" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -35,13 +35,13 @@
                 <DataGridTextColumn Header="Dohányzik" Binding="{Binding DohanyzikSzoveges}" />
                 <DataGridTextColumn Header="Nemzetiség" Binding="{Binding Nemzetiseg}" />
                 <DataGridTextColumn Header="Népcsoport" Binding="{Binding Nepcsoport}" />
-                <DataGridTextColumn Header="Tartomány" Binding="{Binding Tartomany}" />
+                <DataGridTextColumn Header="Tartomány" Binding="{Binding Tartomany}" Width="*"/>
                 <DataGridTextColumn Header="Nettó jövedelem" Binding="{Binding NettoJovedelem}" />
                 <DataGridTextColumn Header="Iskolai végzetség" Binding="{Binding IskolaiVegzetseg}" />
                 <DataGridTextColumn Header="Politikai nézet" Binding="{Binding PolitikaiNezet}" />
                 <DataGridTextColumn Header="Aktív szavazó" Binding="{Binding AktivSzavazoSzoveges}" />
-                <DataGridTextColumn Header="Sörfogyasztás évente" Binding="{Binding SorFogyasztasEvente}" />
-                <DataGridTextColumn Header="Krumplifogyasztás évente" Binding="{Binding KrumpliFogyasztasEvente}" />
+                <DataGridTextColumn Header="Sörfogyasztás évente" Binding="{Binding SorFogyasztasEventeSzoveges}" />
+                <DataGridTextColumn Header="Krumplifogyasztás évente" Binding="{Binding KrumpliFogyasztasEventeSzoveges}" />
             </DataGrid.Columns>
         </DataGrid>
         <ListBox Grid.Row="2" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="MegoldasLista" FontSize="14"/>

@@ -13,13 +13,15 @@ internal class Allampolgar
     public string Nepcsoport { get; set; }
     public string Tartomany { get; set; }
     public int NettoJovedelem { get; set; }
-    public int HaviNettoJovedelem => NettoJovedelem / 12;
+    public double HaviNettoJovedelem => (double)NettoJovedelem / 12;
     public string IskolaiVegzetseg { get; set; }
     public string PolitikaiNezet { get; set; }
     public bool AktivSzavazo { get; set; }
     public string AktivSzavazoSzoveges => AktivSzavazo ? "igen" : "nem";
     public int SorFogyasztasEvente { get; set; }
+    public string SorFogyasztasEventeSzoveges { get; set; }
     public int KrumpliFogyasztasEvente { get; set; }
+    public string KrumpliFogyasztasEventeSzoveges { get; set; }
 
     public Allampolgar(string sor)
     {
@@ -42,8 +44,10 @@ internal class Allampolgar
         IskolaiVegzetseg = adatok[10];
         PolitikaiNezet = adatok[11];
         AktivSzavazo = adatok[12].ToLower() == "igen";
-        
+
+        SorFogyasztasEventeSzoveges = adatok[13];
         if (adatok[13] != "NA") SorFogyasztasEvente = int.Parse(adatok[13]);
+        KrumpliFogyasztasEventeSzoveges = adatok[14];
         if (adatok[14] != "NA") KrumpliFogyasztasEvente = int.Parse(adatok[14]);
     }
 
@@ -55,7 +59,7 @@ internal class Allampolgar
     public string ToString(bool firstFive)
     {
         if (firstFive)
-            return $"{Id}\t{Nem}\t{SzultetesiEv}\t{Suly}kg\t{Magassag}cm";
-        else return $"{Id}\t{Nemzetiseg}\t{Nepcsoport}\t{Tartomany}\t{NettoJovedelem}€";
+            return $"{Id}\t{Nem}\t{SzultetesiEv}\t{Suly} kg\t{Magassag} cm";
+        else return $"{Id}\t{Nemzetiseg}\t{Nepcsoport}\t{Tartomany}\t{NettoJovedelem.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("de-DE"))}";
     }
 }
