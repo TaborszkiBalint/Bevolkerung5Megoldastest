@@ -9,6 +9,8 @@ public partial class MainWindow : Window
     List<Allampolgar> Lakossag = [];
     List<Action> feladatok = [];
     System.Globalization.CultureInfo german = System.Globalization.CultureInfo.GetCultureInfo("de-DE");
+
+    #region Logika
     public MainWindow()
     {
         InitializeComponent();
@@ -44,13 +46,15 @@ public partial class MainWindow : Window
     }
     private void Combo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        MegoldasMondatos.Content = "";
+        MegoldasMondatos.Content = string.Empty;
         MegoldasTeljes.ItemsSource = null;
         MegoldasLista.Items.Clear();
 
         feladatok[FeladatokCombo.SelectedIndex].Invoke();
     }
+    #endregion
 
+    #region Feladatok
     private void Feladat1()
     {
         MegoldasMondatos.Content = $"Legmagasabb nettó éves jövedelem: {Lakossag.OrderByDescending(l => l.NettoJovedelem).First().NettoJovedelem.ToString("C", german)}";
@@ -321,4 +325,6 @@ public partial class MainWindow : Window
         MegoldasLista.Items.Add($"Nem németek havi jövedelme: {nemNemetekHaviJovedelme.ToString("C", german)}\n");
         MegoldasLista.Items.Add($"Százalékos különbség: {szazalekosKulonbseg:.00}%");
     }
+
+    #endregion
 }
