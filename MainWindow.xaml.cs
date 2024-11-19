@@ -277,7 +277,7 @@ public partial class MainWindow : Window
     private void Feladat34()
     {
         MegoldasMondatos.Content = $"55 kg feletti krumplifogyasztók átlagos súlya: {Lakossag
-            .Where(k => k.KrumpliFogyasztasEvente > 55)
+            .Where(k => k.KrumpliFogyasztasEvente > 55 && k.Nem == "férfi")
             .Average(s => s.Suly):.00} kg";
     }
     private void Feladat35()
