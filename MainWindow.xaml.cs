@@ -9,6 +9,7 @@ public partial class MainWindow : Window
     List<Allampolgar> Lakossag = [];
     List<Action> feladatok = [];
     System.Globalization.CultureInfo german = System.Globalization.CultureInfo.GetCultureInfo("de-DE");
+    Random rnd = new Random();
 
     #region Logika
     public MainWindow()
@@ -324,6 +325,55 @@ public partial class MainWindow : Window
         MegoldasLista.Items.Add($"Németek havi jövedelme: {nemetekHaviJovedelme.ToString("C", german)}");
         MegoldasLista.Items.Add($"Nem németek havi jövedelme: {nemNemetekHaviJovedelme.ToString("C", german)}\n");
         MegoldasLista.Items.Add($"Százalékos különbség: {szazalekosKulonbseg:.00}%");
+    }
+
+    private void Feladat41()
+    {
+        if (Lakossag.Any(n => n.Nemzetiseg == "török" && n.AktivSzavazo))
+            MegoldasTeljes.ItemsSource = Lakossag.Where(n => n.Nemzetiseg == "török" && n.AktivSzavazo).OrderBy(a => Guid.NewGuid()).Take(rnd.Next(1, 11));
+        else
+            MegoldasMondatos.Content = "Nincs török aktív szavazó";
+    }
+
+    private void Feladat42()
+    {
+        double altagosSorfogyasztas = Lakossag
+            .Where(x => x.SorFogyasztasEventeSzoveges != "NA")
+            .Average(a => a.SorFogyasztasEvente);
+
+        List<Allampolgar> otAtlagFelettiSorfogyaszto = Lakossag
+            .Where(x => x.SorFogyasztasEvente > altagosSorfogyasztas)
+            .OrderBy(a => Guid.NewGuid())
+            .Take(5).ToList();
+
+        MegoldasLista.Items.Add($"Átlagos sörfogyasztás: {altagosSorfogyasztas:.00} l\n");
+        MegoldasLista.Items.Add("5 véletlenszerű állampolgár, akik az átlagosnál több sört fogyasztanak:");
+        foreach (Allampolgar polgar in otAtlagFelettiSorfogyaszto)
+            MegoldasLista.Items.Add($"{polgar.ToString(true)}");
+    }
+
+    private void Feladat43()
+    {
+        double atlagosJovedelem = Lakossag.Average(x => x.NettoJovedelem);
+        var nagyobbTartomanyok = Lakossag
+            .GroupBy(t => t.Tartomany)
+            .Where(t => t.Min(m => m.NettoJovedelem) > atlagosJovedelem)
+            .OrderBy(a => Guid.NewGuid())
+            .Take(2);
+
+        MegoldasLista.Items.Add($"Átlagos nettó jövedelem: {atlagosJovedelem.ToString("C", german)}\n");
+        foreach (IGrouping<string, Allampolgar> tartomany in nagyobbTartomanyok)
+            MegoldasLista.Items.Add($"{tartomany.Key} - legkisebb nettó jövedelem: {tartomany.Min(m => m.NettoJovedelem).ToString("C", german)}");
+    }
+
+    private void Feladat44()
+    {
+        MegoldasTeljes.ItemsSource = Lakossag.Where(x => x.IskolaiVegzetseg == "").OrderBy(a => Guid.NewGuid()).Take(3);
+    }
+
+    private void Feladat45()
+    {
+        MegoldasTeljes.ItemsSource = Lakossag.Where(x => x.Nem == "nő");
     }
 
     #endregion
