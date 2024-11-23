@@ -373,7 +373,12 @@ public partial class MainWindow : Window
 
     private void Feladat45()
     {
-        MegoldasTeljes.ItemsSource = Lakossag.Where(x => x.Nem == "nő");
+        MegoldasTeljes.ItemsSource = Lakossag.Where(x => x.Nem == "nő" && x.Nepcsoport != "bajor" && x.IskolaiVegzetseg == "Universität").Take(5);
+
+        double elsoFizetese = Lakossag.Where(x => x.Nem == "nő" && x.Nepcsoport != "bajor" && x.IskolaiVegzetseg == "Universität").First().NettoJovedelem;
+
+        foreach (Allampolgar polgar in Lakossag.Where(x => x.Nem == "nő" && x.NettoJovedelem > elsoFizetese).OrderBy(a => Guid.NewGuid()).Take(3))
+            MegoldasLista.Items.Add($"{polgar.ToString(true)}");
     }
 
     #endregion
